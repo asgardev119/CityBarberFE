@@ -13,7 +13,7 @@ import InputField from "../component/InputField";
 import Home from "../screens/Home";
 import { useNavigation } from "@react-navigation/native";
 
-const Forgot = () => {
+const ForgotPassword = () => {
   const navigation: any = useNavigation();
 
   const [email, setEmail] = useState("");
@@ -222,4 +222,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Forgot;
+export default ForgotPassword;

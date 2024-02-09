@@ -13,10 +13,11 @@ import Btn from "../component/Btn";
 import InputField from "../component/InputField";
 import Home from "../screens/Home";
 import { useNavigation } from "@react-navigation/native";
-import Dashboard from "../users/Provider/Dashboard/Dashboard";
+import DashboardProvider from "../users/Provider/Dashboard/DashboardProvider";
 import { Button } from "react-native-paper";
 
 const Login = () => {
+
   const navigation: any = useNavigation();
 
   const [email, setEmail] = useState("");
@@ -71,7 +72,7 @@ const Login = () => {
 
   const handleSubmit = () => {
     if (validateEmail() && validatePassword()) {
-      navigation.navigate("Dashboard");
+      navigation.navigate("DashboardProvider");
     } else {
       validateEmail();
       validatePassword();
@@ -79,7 +80,7 @@ const Login = () => {
   };
 
   const onForgot = () => {
-    navigation.navigate("Forgot");
+    navigation.navigate("ForgotPassword");
   };
 
   return (

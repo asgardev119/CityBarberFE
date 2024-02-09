@@ -12,6 +12,7 @@ const InputField = ({
   keyboardType,
   placeholder,
   borderBottomColor,
+  borderWidth
 }: any) => {
   return (
     <TextInput
@@ -31,6 +32,7 @@ const InputField = ({
       keyboardType={keyboardType}
       placeholder={placeholder}
       borderBottomColor={borderBottomColor}
+      borderWidth ={borderWidth}
     ></TextInput>
   );
 };

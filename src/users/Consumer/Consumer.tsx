@@ -40,10 +40,6 @@ const Consumer = () => {
 
   const handleSubmit = () => {
     navigation.navigate("Home");
-    //     if(data.userName.trim() === ''&& data.email.trim()==='' && data.password.trim()==='')
-    //   setDataError(true);
-    //     else{
-    //         console.log("Successfully Sign Up");
   };
 
   return (

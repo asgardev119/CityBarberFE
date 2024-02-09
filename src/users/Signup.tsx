@@ -9,8 +9,6 @@ import {
 import React, { Component, useState } from "react";
 import Background from "../component/Background";
 import { RadioButton } from "react-native-paper";
-import { Card } from "react-native-paper";
-import { SafeAreaView } from "react-native-safe-area-context";
 import InputField from "../component/InputField";
 import Btn from "../component/Btn";
 import { useNavigation } from "@react-navigation/native";
@@ -18,8 +16,8 @@ import Consumer from "./Consumer/Consumer";
 import Provider from "./Provider/Provider";
 
 const Signup = () => {
+  
   const navigation: any = useNavigation();
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
@@ -111,9 +109,9 @@ const Signup = () => {
       optionsValidation()
     ) {
       if (selectedValue === "consumer") {
-        navigation.navigate("Consumer");
+        navigation.navigate(Consumer);
       } else if (selectedValue === "provider") {
-        navigation.navigate("Provider");
+        navigation.navigate(Provider);
       }
     } else {
       validateEmail();
@@ -122,51 +120,6 @@ const Signup = () => {
       optionsValidation();
     }
   };
-
-  // for api------>
-  // const handleSubmit = async () => {
-  //   const url = "https://citybarberbe.onrender.com/user/register";
-  //   if (Validate()) {
-  //     try {
-  //       const result = await fetch(url, {
-  //         method: "POST",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify({
-  //           name: data.name,
-  //           email: data.email,
-  //           password: data.password,
-  //           userType: selectedValue,
-  //         }),
-  //       });
-
-  //       console.log(
-  //         "Request Data:",
-  //         JSON.stringify({
-  //           name: data.name,
-  //           email: data.email,
-  //           password: data.password,
-  //           userType: selectedValue,
-  //         })
-  //       );
-
-  //       if (!result.ok) {
-  //         throw new Error("API request failed");
-  //       }
-
-  //       if (selectedValue === "consumer") {
-  //         navigation.navigate("Consumer");
-  //       } else if (selectedValue === "provider") {
-  //         navigation.navigate("Provider");
-  //       }
-  //     } catch (error) {
-  //       console.error("Error during API call:", error);
-  //       alert("Failed to create account. Please try again.");
-  //     }
-  //   }
-  //   // console.log(data);
-  // };
 
   return (
     <Background>

@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import Background from "../../../../component/Background";
-import Dashboard from "../Dashboard";
+import Dashboard from "../DashboardProvider";
 import Login from "../../../../auth/Login";
-import { ShopList } from "./ShopList";
 import {
   Text,
   StyleSheet,
@@ -10,28 +8,17 @@ import {
   ScrollView,
   Touchable,
   TouchableOpacity,
-  Button,
-  Platform,
-  TextInput,
   Image,
 } from "react-native";
 import InputField from "../../../../component/InputField";
 import Btn from "../../../../component/Btn";
 import { useNavigation } from "@react-navigation/native";
-import DatePicker from "react-native-modern-datepicker";
 import DropDownPicker from "react-native-dropdown-picker";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import ImagePicker from "react-native-image-picker";
-// import { Image } from "react-native";
-// import { launchImageLibrary } from "react-native-image-picker";
 import DocumentPicker from "react-native-document-picker";
 
-// interface ValueMap {
-//   hours: number;
-//   minutes: number;
-// }
-
-export const AddShop = ({ onSubmit }: any) => {
+export const EditShopDetails = () => {
   const navigation = useNavigation<any>();
 
   // states for  input Fields Names ---->
@@ -40,13 +27,6 @@ export const AddShop = ({ onSubmit }: any) => {
     shopName: "",
     ownerName: "",
   });
-
-  // sates for DropDown for opening and closing days----->
-
-  const [isOpen, setIsOpen] = useState(false);
-  const [currentValue, setCurrentValue] = useState("");
-  const [isClose, setIsClose] = useState(false);
-  const [currentClosingDays, setCurrentClosingDays] = useState("");
 
   // sates for SelectTime -------->
 
@@ -92,38 +72,15 @@ export const AddShop = ({ onSubmit }: any) => {
     }));
   };
 
-  const Days = [
-    { label: "Monday", value: "Monday" },
-    {
-      label: "Tuesday",
-      value: "Tuesday",
-    },
-    {
-      label: "Wednesday",
-      value: "Wednesday",
-    },
-    {
-      label: "Thursday",
-      value: "Thursday",
-    },
-    {
-      label: "Friday",
-      value: "Friday",
-    },
-    {
-      label: "Saturday",
-      value: "Saturday",
-    },
-    {
-      label: "Sunday",
-      value: "Sunday",
-    },
-  ];
+  const onChange = () => {
+    navigation.navigate(Dashboard);
+  };
 
   return (
     <View>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
-        <Text style={styles.title}> Add Shop Details</Text>
+        <Text style={styles.title}> Edit Shop Details</Text>
+
         <View style={styles.root}>
           <View style={styles.inputContainer}>
             <Text>Owner Name</Text>
@@ -204,36 +161,6 @@ export const AddShop = ({ onSubmit }: any) => {
             </TouchableOpacity>
           </View>
 
-          {/* DropDowenPicker-------- */}
-
-          <View style={[styles.inputContainer, { borderBottomWidth: 1 }]}>
-            <DropDownPicker
-              open={isOpen}
-              setOpen={() => setIsOpen(!isOpen)}
-              value={currentValue}
-              items={Days}
-              // multiple={true}
-              setValue={(val) => setCurrentValue(val)}
-              maxHeight={500}
-              placeholder="Select opening Day"
-              style={{ borderColor: "transparent" }}
-            />
-          </View>
-
-          <View style={[styles.inputContainer, { borderBottomWidth: 1 }]}>
-            <DropDownPicker
-              open={isClose}
-              setOpen={() => setIsClose(!isClose)}
-              value={currentClosingDays}
-              items={Days}
-              // multiple={true}
-              setValue={(val) => setCurrentClosingDays(val)}
-              maxHeight={500}
-              placeholder="Select Closing Day"
-              style={{ borderColor: "transparent" }}
-            />
-          </View>
-
           <View>
             <TouchableOpacity
               style={{
@@ -255,7 +182,7 @@ export const AddShop = ({ onSubmit }: any) => {
             btnLabel={"submit"}
             bgColor={"tomato"}
             textColor={"#fff"}
-            onPress={onSubmit}
+            onPress={onChange}
           />
         </View>
       </ScrollView>

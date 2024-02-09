@@ -7,12 +7,12 @@ import { useNavigation } from "@react-navigation/native";
 import Signup from "../users/Signup";
 import Login from "../auth/Login";
 
-interface HomeScreenProps{
-  navigation :any
+interface HomeScreenProps {
+  navigation: any;
 }
 
-const Home : React.FC<HomeScreenProps>= ({navigation}: any) => {
-
+const Home: React.FC<HomeScreenProps> = ({ navigation }: any) => {
+  
   const handleSignupBtn = () => {
     navigation.navigate("Signup");
   };

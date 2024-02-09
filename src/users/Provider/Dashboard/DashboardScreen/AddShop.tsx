@@ -1,25 +1,24 @@
 import React, { useState } from "react";
-import Dashboard from "../Dashboard";
+import Background from "../../../../component/Background";
+import Dashboard from "../DashboardProvider";
 import Login from "../../../../auth/Login";
-import { ShopList } from "./ShopList";
 import {
   Text,
   StyleSheet,
   View,
   ScrollView,
-  Touchable,
   TouchableOpacity,
   Image,
 } from "react-native";
 import InputField from "../../../../component/InputField";
 import Btn from "../../../../component/Btn";
 import { useNavigation } from "@react-navigation/native";
+import DatePicker from "react-native-modern-datepicker";
 import DropDownPicker from "react-native-dropdown-picker";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import ImagePicker from "react-native-image-picker";
-import DocumentPicker from "react-native-document-picker";
+import Header from "../../../../component/Header";
 
-export const EditShopDetails = () => {
+export const AddShop = ({ onSubmit }: any) => {
   const navigation = useNavigation<any>();
 
   // states for  input Fields Names ---->
@@ -28,14 +27,7 @@ export const EditShopDetails = () => {
     shopName: "",
     ownerName: "",
   });
-
-  // sates for DropDown for opening and closing days----->
-
-  const [isOpen, setIsOpen] = useState(false);
-  const [currentValue, setCurrentValue] = useState("");
-  const [isClose, setIsClose] = useState(false);
-  const [currentClosingDays, setCurrentClosingDays] = useState("");
-
+  
   // sates for SelectTime -------->
 
   const [openingTime, setOpeningTime] = useState(new Date());
@@ -67,10 +59,14 @@ export const EditShopDetails = () => {
   const formatTime = (time: any) => {
     const hours = time.getHours();
     const minutes = time.getMinutes();
-    const formattedHours = hours % 24 || 24;
+    // const formattedHours = hours % 24 || 24;
+    // const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+    // // const period = hours >= 12 ? "PM" : "AM";
+    // return `${formattedHours}:${formattedMinutes}`;
+    const formattedHours = hours % 12 || 12; // Convert to 12-hour format
     const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
-    // const period = hours >= 12 ? "PM" : "AM";
-    return `${formattedHours}:${formattedMinutes}`;
+    const period = hours >= 12 ? "PM" : "AM";
+    return `${formattedHours}:${formattedMinutes} ${period}`;
   };
 
   const handleInputChange = (field: string, value: any) => {
@@ -80,46 +76,14 @@ export const EditShopDetails = () => {
     }));
   };
 
-  const Days = [
-    { label: "Monday", value: "Monday" },
-    {
-      label: "Tuesday",
-      value: "Tuesday",
-    },
-    {
-      label: "Wednesday",
-      value: "Wednesday",
-    },
-    {
-      label: "Thursday",
-      value: "Thursday",
-    },
-    {
-      label: "Friday",
-      value: "Friday",
-    },
-    {
-      label: "Saturday",
-      value: "Saturday",
-    },
-    {
-      label: "Sunday",
-      value: "Sunday",
-    },
-  ];
-
-  const onChange = () => {
-    navigation.navigate(Dashboard);
-  };
-
   return (
     <View>
+      <Header name="Provider" />
       <ScrollView contentContainerStyle={styles.scrollContainer}>
-        <Text style={styles.title}> Edit Shop Details</Text>
-
+        <Text style={styles.title}> Add Shop Details</Text>
         <View style={styles.root}>
           <View style={styles.inputContainer}>
-            <Text>Owner Name</Text>
+            <Text>Shop Address</Text>
             <InputField
               placeholderTextColor="#003f5c"
               width={350}
@@ -148,7 +112,7 @@ export const EditShopDetails = () => {
               <DateTimePicker
                 value={openingTime}
                 mode="time"
-                is24Hour={true}
+                is24Hour={false}
                 display="spinner"
                 onChange={onOpeningTimeChange}
               />
@@ -176,7 +140,7 @@ export const EditShopDetails = () => {
               <DateTimePicker
                 value={closingTime}
                 mode="time"
-                is24Hour={true}
+                is24Hour={false}
                 display="spinner"
                 onChange={onClosingTimeChange}
               />
@@ -195,36 +159,6 @@ export const EditShopDetails = () => {
                 </Text>
               )}
             </TouchableOpacity>
-          </View>
-
-          {/* DropDowenPicker-------- */}
-
-          <View style={[styles.inputContainer, { borderBottomWidth: 1 }]}>
-            <DropDownPicker
-              open={isOpen}
-              setOpen={() => setIsOpen(!isOpen)}
-              value={currentValue}
-              items={Days}
-              // multiple={true}
-              setValue={(val) => setCurrentValue(val)}
-              maxHeight={500}
-              placeholder="Select opening Day"
-              style={{ borderColor: "transparent" }}
-            />
-          </View>
-
-          <View style={[styles.inputContainer, { borderBottomWidth: 1 }]}>
-            <DropDownPicker
-              open={isClose}
-              setOpen={() => setIsClose(!isClose)}
-              value={currentClosingDays}
-              items={Days}
-              // multiple={true}
-              setValue={(val) => setCurrentClosingDays(val)}
-              maxHeight={500}
-              placeholder="Select Closing Day"
-              style={{ borderColor: "transparent" }}
-            />
           </View>
 
           <View>
@@ -248,7 +182,7 @@ export const EditShopDetails = () => {
             btnLabel={"submit"}
             bgColor={"tomato"}
             textColor={"#fff"}
-            onPress={onChange}
+            onPress={onSubmit}
           />
         </View>
       </ScrollView>
@@ -267,7 +201,7 @@ const styles = StyleSheet.create({
     height: 700,
     width: 400,
     backgroundColor: "#fff",
-    marginTop: 200,
+    marginTop: 150,
     marginLeft: 10,
     borderRadius: 20,
     padding: 20,

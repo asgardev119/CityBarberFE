@@ -18,7 +18,7 @@ import Btn from "../component/Btn";
 import Logo from "../component/Logo";
 import { useNavigation } from "@react-navigation/native";
 
-export const Reset = () => {
+export const ResetPassword = () => {
   const [newPassword, setNewPassword] = useState("");
   const [ConfirmPassword, setConfirmPassword] = useState("");
 
@@ -69,4 +69,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Reset;
+export default ResetPassword;

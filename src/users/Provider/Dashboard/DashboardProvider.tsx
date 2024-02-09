@@ -1,19 +1,17 @@
 import { Text, View, Image, StyleSheet, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-import Btn from "../../../component/Btn";
-import { AddShop } from "./DashScreen/AddShop";
-import Background from "../../../component/Background";
+import { AddShop } from "./DashboardScreen/AddShop";
 import {
   widthPercentageToDP,
   heightPercentageToDP,
 } from "react-native-responsive-screen";
-import { Profile } from "./DashScreen/Profile";
-import { Location } from "./DashScreen/Location";
-import Help from "./DashScreen/Help";
-import { ShopList } from "./DashScreen/ShopList";
+import { ProviderProfile } from "./DashboardScreen/ProviderProfile";
+import { Location } from "../../../screens/Location";
+import Help from "../../../screens/Help";
+import ShopDetails from "./DashboardScreen/ShopDetails";
 
-const Dashboard = () => {
+const DashboardProvider = () => {
   const [selectedTab, setSelectedTab] = useState(0);
   const navigation = useNavigation();
   const [showAddShop, setShowAddShop] = useState(true);
@@ -28,15 +26,16 @@ const Dashboard = () => {
         showAddShop ? (
           <AddShop onSubmit={handleAddShopSubmit} />
         ) : (
-          <ShopList />
+          <ShopDetails />
         )
       ) : selectedTab == 1 ? (
         <Location />
       ) : selectedTab == 2 ? (
         <Help />
       ) : (
-        <Profile />
+        <ProviderProfile />
       )}
+
       <View style={styles.bottomNavigation}>
         <TouchableOpacity
           style={styles.btn}
@@ -45,7 +44,7 @@ const Dashboard = () => {
           }}
         >
           <Image
-            source={require("../../../../public/images/store2.png")}
+            source={require("../../../../public/images/home.png")}
             style={{
               width: widthPercentageToDP("6"),
               height: heightPercentageToDP("3"),
@@ -133,4 +132,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Dashboard;
+export default DashboardProvider;
